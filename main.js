@@ -66,6 +66,40 @@ function moveCount(board){
     return moveCount
 }
 
+function getResult(board,symbol){
+    //recieves a board, and the symbol of the player and returns an object with the result and an array of the winning line
+    let result = Result.incomplete
+    if (moveCount(board)<5){
+        return {result}
+    }
+
+    function succession (line){
+        return (line === symbol.repeat(3))
+    }
+
+    let line
+    let winningLine = []
+
+    //first we check row, then column, then diagonal
+    for (var i = 0; i<3; i++){
+        line = board[i].join('')
+        if(succession(line)){
+            result = symbol;
+            winningLine = [[i,0], [i,1], [i,2]]
+            return {result, winningLine};
+        }
+    }
+
+    for (var j = 0; j<3; j++){
+        let column = [board[0][j],board[1][j],board[2][j]]
+        line = column.join('')
+        if(succession(line)){
+            result = symbol;
+            winningline = [[0,j]]
+        }
+    }
+
+}
 
 
 }
