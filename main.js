@@ -22,8 +22,36 @@ const VIEW = {
     result: 4
 }
 
+function board(options){
+    //Creates the board Object for the game
 
+    // -- Data Structure --
+    state = {
+        view: VIEW.question1,
+        players: [
+            {
+                symbol: null,
+                isComputer: false,
+                score: 0
+            },
+            {
+                symbol: null,
+                isComputer: false,
+                score: 0
+            }
+        ]
+    }
 
+    function initGame(){
+        state.game = {
+            _gameBoard: [
+                ["", "", ""],
+                ["", "", ""],
+                ["", "", ""]
+            ]
+        }
+    }
+}
 
 
 
