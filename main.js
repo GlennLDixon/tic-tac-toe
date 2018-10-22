@@ -159,6 +159,35 @@ function getBestMove (board, symbol) {
         }
     }
 
+    let availableMoves = getAvailableMoves(board)
+    let availableMovesAndScores = []
+
+    for (var i = 0; i < availableMoves.length; i++) {
+        // Iterates over each available move. If it finds a winning move it returns it immediately. Otherwise
+        let move = availableMoves[i]
+        let newBoard = copyBoard(board)
+        newBoard = applyMove(newBoard, move, symbol)
+        result = getResult(newBoard,symbol).result
+        let score
+        if (result == RESULT.tie) {score = 0}
+        else if (result == symbol) {
+            score = 1
+        } else {
+            let otherSymbol = (symbol==SYMBOLS.x)? SYMBOLS.o : SYMBOLS.x
+            nextMove = getBestMove(newBoard, otherSymbol)
+            score = - (nextMove.score)
+        }
+        if(score === 1)
+            return {move, score}
+        availableMovesAndScores.push({move, score})
+    }
+
+    shuffleArray(availableMovesAndScores)
+
+    availableMovesAndScores.sort((moveA, moveB)=>{
+        return moveB.score - moveA.score
+    })
+    return availableMovesAndScores[0]
 }
 
 }
