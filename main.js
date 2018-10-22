@@ -188,7 +188,7 @@ function getBestMove (board, symbol) {
         return moveB.score - moveA.score
     })
     return availableMovesAndScores[0]
-}
+ }
 
 }
 
