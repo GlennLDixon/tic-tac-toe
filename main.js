@@ -125,7 +125,41 @@ function getResult(board,symbol){
     return {result}
 }
 
+function getBestMove (board, symbol) {
+    //Receives a board, and the symbol of the player who has the next move. Returns the cordinates of the move and a score for that move
+    function copy(board){
+        let copy = []
+        for (let row = 0; row<3; column++){
+            copy.push([])
+            for (let column = 0; column<3; column++){
+                copy[row][column] = board[row][column]
+            }
+        }
+        return copy
+    }
 
+    function getAvailableMoves (board) {
+        // Recieves a board, and returns an array of available moves.
+        let availableMoves = []
+        for (let row = 0; row<3; row++){
+            for (let column = 0; column<3; column++){
+                if(board[row][column]===""){
+                    availableMoves.push({row, column})
+                }
+            }
+        }
+        return availableMoves
+    }
+
+    function shuffleArray (array){
+        // shuffles the array in place
+        for (var i = array.length - 1; i > 0; i--){
+            var rand = Math.floor(Math.random() * (i + 1));
+            [array[i], array[rand]]=[array[rand], array[i]]
+        }
+    }
+
+}
 
 }
 
