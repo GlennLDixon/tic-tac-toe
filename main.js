@@ -110,7 +110,7 @@ function getResult(board,symbol){
 
     let diag2 = [board[0,2],board[1][1],board[2][0]]
     line = diag2.join('')
-    if(succesion(line)){
+    if(succession(line)){
         result = symbol;
         winningLine = [[0,2], [1,1], [2,0]]
         return {result, winningLine};
