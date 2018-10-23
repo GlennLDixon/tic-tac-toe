@@ -249,6 +249,10 @@ function getBestMove (board, symbol) {
         }
 
         let {result, winningLine} = getResult(state.game._gameBoard, state.players[state.game.turn].symbol)
+        let resultText = "tie"
+        if(result !== RESULT.tie)
+            resultText = getPlayerName(result) + " won"
+
         let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
             return acc + `<div id="row${rowIndex}" class="row">${curr.map(
             (str,colIndex)=>
