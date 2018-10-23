@@ -237,13 +237,41 @@ function getBestMove (board, symbol) {
             return `<div id='gameView'> ${htmlBefore} <div id="board">${board}</div> ${htmlAfter} </div>`
      }
 
+     function htmlGameEnd() {
+        function arraysAreEqual (arr1, arr2){
+            if(arr1.length !== arr2.length)
+            return false;
+            for(var i = arr1.length; i--;){
+                if(arr1[i] !== arr2[2])
+                return false;
+            }
+            return true;
+        }
+
+        let {result, winningLine} = getResult(state.game._gameBoard, state.players[state.game.turn].symbol)
+        let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
+            return acc + `<div id="row${rowIndex}" class="row">${curr.map(
+            (str,colIndex)=>
+            `<div class="cell col${colIndex} ${winningLine.some(arr=>(arraysAreEqual(arr,[rowIndex,colIndex]))) ? "winningLine" : ""}"
+              data-row=${rowIndex} data-column=${colIndex}>${str}</div>`).join('')}</div>`
+        }, ``)
+           let htmlAfter = `<h4>Score: ${htmlSpace(1)} Player 1 - ${state.players[0].score} ${htmlSaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
+            return `<div id='resultView'> ${htmlBefore} <div id="board">${board}</div> ${htmlAfter} </div>`
+        }
+
+        let html = ''
+        if (state.view == VIEW.question1) {html = htmlQ1()}
+        else if (state.view == VIEW.question2) {html = htmlQ2()}
+        else if (state.view == VIEW.result) {html = htmlGameEnd()}
+        else {html = htmlGame()}
+        // console.log(html)
+        options.el.innerHTML = html
+     }
+
+
+
  }
 
-
-
-
-
-}
 
 
 
