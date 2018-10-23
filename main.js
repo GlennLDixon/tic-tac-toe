@@ -300,10 +300,55 @@ function getBestMove (board, symbol) {
         executeTurn(state.game._gameBoard, {row, column}, symbol)
     }
 
+    function applyMove(board, move, symbol) {
+         board[move.row][move.column]= symbol
+         return board
+    }
+    
+    function executeTurn(board, move, symbol) {
+       if (board[move.row][move.column]!==""){
+           return board
+       }
 
+       applyMove(board,move,symbol)
+       let result = getResult(board, symbol).result
 
+       if (result === RESULT.incomplete){
+           state.game.turn = (state.game.turn+1)%2
+           render()
+       } else {
+           //Increment score and show result
+           if(result !== RESULT.tie) {
+               let winningPlayer = state.players.find((player)=>{return player.symbol == result})
+               winningPlayer.score++
+           }
+
+           state.view = VIEW.result
+           render()
+       }
+       if (reuslt==RESULT.incomplete && state.players[state.game.turn].isComputer){
+           doComputerMove()
+       }
+    }
+
+    function beginGame(){
+        initGame()
+        state.view = VIEW.game
+        render()
+        if(state.game.turn === 1 && state.players[1].isComputer)
+            doComputerMove()
+    }
+
+    $(options.el).on('click', '.btnGroup1', question1Handler)
+    $(options.el).on('click', '.btnGroup2', question2Handler)
+    $(options.el).on('click', '#gameView .cell', playerMoveHandler)
+    $(options.el).on('click', '#resultView', beginGame)
+
+    render()
  }
 
 
-
+const board = new Board ({
+    el : document.getElementById('root')
+})
 
