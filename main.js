@@ -197,8 +197,48 @@ function getBestMove (board, symbol) {
             return state.players[0].isComputer ? 'Computer' : "Player1"
             return state.players[1].isComputer ? 'Computer' : "Player2"
      }
+
+     function buttonHTML(btnGroup, data, text){
+         return `<button type="button" class="btn btn-lg btn-default btnGroup${btnGroup}" data=${data}>${text}</button>`
+     }
+
+     function htmlSpaces (times){
+         return '&emsp;'.repeat(times)
+     }
+
+     function htmlQ1(){
+         return `<div id="view1"><h3>Which do you prefer?\n</h3>
+            ${buttonHTML(1, "1player", "Man Against Computer")}         
+            ${buttonHTML(2, "2player", "Man Against Man")}         
+         </div>`
+     }
+
+     function htmlQ2(){
+         const html2 = `<div id="view2"><h3>${!state.players[1].isComputer? "Player 1, <br />" : ""}Which symbols would you like to use?</h3>
+         ${buttonHTML(2, "X", "X")}
+         ${buttonHTML(2, "O", "O")}
+         </div>
+         `
+         return html2
+     }
+
+     function htmlGame() {
+         const moveNumber = moveCount(state.game._gameBoard) + 1
+         const playerName = state.game.turn === 0 ? 'Player1' : state.players[1].isComputer ? 'Computer' : 'Player2'
+         // Let playerName = 'Computer'
+         // if(!state.players[state.game.turn].isComputer)
+         // playerName = state.game.turn === 0 ? 'Player!' : 'Player2'
+
+         let htmlBefore = `<h3>move: ${moveNumber} ${htmlSpaces(5)} turn: ${playerName}</h3>`
+         let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
+             return acc + `<div id="row${rowIndex}" class="row">${curr.map((str,colIndex)=>`<div class="cell col${colIndex}" data-row=${rowIndex} data-column=${colIndex}>${str}</div>`).join('')}</div>`
+            }, ``)
+            let htmlAfter = `<h4>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSpaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
+            return `<div id='gameView'> ${htmlBefore} <div id="board">${board}</div> ${htmlAfter} </div>`
+     }
+
  }
- 
+
 
 
 
