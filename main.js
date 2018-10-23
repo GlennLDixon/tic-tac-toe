@@ -108,7 +108,7 @@ function getResult(board,symbol){
         return {result, winningLine};
     }
 
-    let diag2 = [board[0,2],board[1][1],board[2][0]]
+    let diag2 = [board[0][2],board[1][1],board[2][0]]
     line = diag2.join('')
     if(succession(line)){
         result = symbol;
@@ -209,7 +209,7 @@ function getBestMove (board, symbol) {
      function htmlQ1(){
          return `<div id="view1"><h3>Which do you prefer?\n</h3>
             ${buttonHTML(1, "1player", "Man Against Computer")}         
-            ${buttonHTML(2, "2player", "Man Against Man")}         
+            ${buttonHTML(1, "2player", "Man Against Man")}         
          </div>`
      }
 
@@ -242,7 +242,7 @@ function getBestMove (board, symbol) {
             if(arr1.length !== arr2.length)
             return false;
             for(var i = arr1.length; i--;){
-                if(arr1[i] !== arr2[2])
+                if(arr1[i] !== arr2[i])
                 return false;
             }
             return true;
@@ -260,7 +260,7 @@ function getBestMove (board, symbol) {
             `<div class="cell col${colIndex} ${winningLine.some(arr=>(arraysAreEqual(arr,[rowIndex,colIndex]))) ? "winningLine" : ""}"
               data-row=${rowIndex} data-column=${colIndex}>${str}</div>`).join('')}</div>`
         }, ``)
-           let htmlAfter = `<h4>Score: ${htmlSpace(1)} Player 1 - ${state.players[0].score} ${htmlSaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
+           let htmlAfter = `<h4>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
             return `<div id='resultView'> ${htmlBefore} <div id="board">${board}</div> ${htmlAfter} </div>`
         }
 
