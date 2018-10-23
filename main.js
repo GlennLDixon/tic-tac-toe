@@ -268,7 +268,24 @@ function getBestMove (board, symbol) {
         options.el.innerHTML = html
      }
 
+    function question1Handler(ev) {
+        state.players[1].isComputer = !($(ev.currentTarget).attr('data') === "2players")
+        state.view = VIEW.question2
+        render()
+    }
 
+    function question2Handler(ev) {
+        let player1Symbol = $(ev.currentTarget).attr('data')
+        state.players[0].symbol = player1Symbol;
+        state.players[1].symbol = (players1Symbol === SYMBOLS.x) ? SYMBOLS.o : SYMBOLS.x;
+
+        state.view = VIEW.game
+        initGame()
+        if(state.players[state.game.turn].isComputer)
+            doComputerMove()
+        
+        render()
+    }
 
  }
 
