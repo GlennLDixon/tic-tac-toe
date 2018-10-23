@@ -287,6 +287,21 @@ function getBestMove (board, symbol) {
         render()
     }
 
+    function doComputerMove() {
+        let symbol = state.players[1].symbol
+        let move = getBestMove(state.game._gameBoard, symbol).move
+        executeTurn(state.game._gameBoard, move, symbol)
+    }
+
+    function playerMoveHandler(ev) {
+        let symbol = state.players[state.game.turn].symbol
+        let row = parseInt($(ev.currentTarget).attr('data-row'))
+        let column = parseInt($(ev.currentTarget).attr('data-column'))
+        executeTurn(state.game._gameBoard, {row, column}, symbol)
+    }
+
+
+
  }
 
 
