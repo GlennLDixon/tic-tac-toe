@@ -127,9 +127,9 @@ function getResult(board,symbol){
 
 function getBestMove (board, symbol) {
     //Receives a board, and the symbol of the player who has the next move. Returns the cordinates of the move and a score for that move
-    function copy(board){
+    function copyBoard(board){
         let copy = []
-        for (let row = 0; row<3; column++){
+        for (let row = 0; row<3; row++){
             copy.push([])
             for (let column = 0; column<3; column++){
                 copy[row][column] = board[row][column]
