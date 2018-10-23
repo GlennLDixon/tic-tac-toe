@@ -8,7 +8,7 @@ const SYMBOLS = {
     o: 'O'
 }
 
-const Result = {
+const RESULT = {
     incomplete: 0,
     playerXWon: SYMBOLS.x,
     playerOWon: SYMBOLS.o,
@@ -22,7 +22,7 @@ const VIEW = {
     result: 4
 }
 
-function board(options){
+function Board(options){
     //Creates the board Object for the game
 
     // -- Data Structure --
@@ -68,7 +68,7 @@ function moveCount(board){
 
 function getResult(board,symbol){
     //recieves a board, and the symbol of the player and returns an object with the result and an array of the winning line
-    let result = Result.incomplete
+    let result = RESULT.incomplete
     if (moveCount(board)<5){
         return {result}
     }
@@ -103,7 +103,7 @@ function getResult(board,symbol){
     let diag1 = [board[0][0], board[1][1], board[2][2]]
     line = diag1.join('')
     if(succession(line)){
-        result = symbol
+        result = symbol;
         winningLine = [[0,0], [1,1], [2,2]]
         return {result, winningLine};
     }
@@ -111,7 +111,7 @@ function getResult(board,symbol){
     let diag2 = [board[0,2],board[1][1],board[2][0]]
     line = diag2.join('')
     if(succesion(line)){
-        result = symbol
+        result = symbol;
         winningLine = [[0,2], [1,1], [2,0]]
         return {result, winningLine};
     }
@@ -253,6 +253,7 @@ function getBestMove (board, symbol) {
         if(result !== RESULT.tie)
             resultText = getPlayerName(result) + " won"
 
+        let htmlBefore = `<h3>${resultText} ${htmlSpaces(2)} Click to restart</h3>`
         let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
             return acc + `<div id="row${rowIndex}" class="row">${curr.map(
             (str,colIndex)=>
@@ -281,7 +282,7 @@ function getBestMove (board, symbol) {
     function question2Handler(ev) {
         let player1Symbol = $(ev.currentTarget).attr('data')
         state.players[0].symbol = player1Symbol;
-        state.players[1].symbol = (players1Symbol === SYMBOLS.x) ? SYMBOLS.o : SYMBOLS.x;
+        state.players[1].symbol = (player1Symbol === SYMBOLS.x) ? SYMBOLS.o : SYMBOLS.x;
 
         state.view = VIEW.game
         initGame()
@@ -330,7 +331,7 @@ function getBestMove (board, symbol) {
            state.view = VIEW.result
            render()
        }
-       if (reuslt==RESULT.incomplete && state.players[state.game.turn].isComputer){
+       if (result==RESULT.incomplete && state.players[state.game.turn].isComputer){
            doComputerMove()
        }
     }
