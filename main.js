@@ -198,6 +198,7 @@ function getBestMove (board, symbol) {
             return state.players[1].isComputer ? 'Computer' : "Player2"
      }
  }
+ 
 
 
 
