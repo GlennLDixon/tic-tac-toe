@@ -228,11 +228,11 @@ function getBestMove (board, symbol) {
          if(!state.players[state.game.turn].isComputer)
           playerName = state.game.turn === 0 ? 'Player1' : 'Player2'
 
-         let htmlBefore = `<h3>move: ${moveNumber} ${htmlSpaces(5)} turn: ${playerName}</h3>`
+         let htmlBefore = `<p>move: ${moveNumber} ${htmlSpaces(5)} turn: ${playerName}</p>`
          let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
              return acc + `<div id="row${rowIndex}" class="row">${curr.map((str,colIndex)=>`<div class="cell col${colIndex}" data-row=${rowIndex} data-column=${colIndex}>${str}</div>`).join('')}</div>`
             }, ``)
-            let htmlAfter = `<h4>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSpaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
+            let htmlAfter = `<p>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSpaces(1)} Player 2 - ${state.players[1].score}</p>`
             return `<div id='gameView'> ${htmlBefore} <div id="board">${board}</div> ${htmlAfter} </div>`
      }
 
