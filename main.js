@@ -252,14 +252,14 @@ function getBestMove (board, symbol) {
         if(result !== RESULT.tie)
             resultText = getPlayerName(result) + " won"
 
-        let htmlBefore = `<h3>${resultText} ${htmlSpaces(6)} Click to restart</h3>`
+        let htmlBefore = `<p>${resultText} ${htmlSpaces(6)} Click to restart</p>`
         let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
             return acc + `<div id="row${rowIndex}" class="row">${curr.map(
             (str,colIndex)=>
             `<div class="cell col${colIndex} ${winningLine.some(arr=>(arraysAreEqual(arr,[rowIndex,colIndex]))) ? "winningLine" : ""}"
               data-row=${rowIndex} data-column=${colIndex}>${str}</div>`).join('')}</div>`
         }, ``)
-           let htmlAfter = `<h4>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSpaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
+           let htmlAfter = `<p>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSpaces(1)} Player 2 - ${state.players[1].score}</p>`
             return `<div id='resultView'> ${htmlBefore} <div id="board">${board}</div> ${htmlAfter} </div>`
         }
 
@@ -318,18 +318,18 @@ function getBestMove (board, symbol) {
        let result = getResult(board, symbol).result
 
        if (result === RESULT.incomplete){
-           state.game.turn = (state.game.turn+1)%2
            render()
-       } else {
-           //Increment score and show result
-           if(result !== RESULT.tie) {
-               let winningPlayer = state.players.find((player)=>{return player.symbol == result})
-               winningPlayer.score++
-           }
-
-           state.view = VIEW.result
-           render()
-       }
+        } else {
+            //Increment score and show result
+            if(result !== RESULT.tie) {
+                let winningPlayer = state.players.find((player)=>{return player.symbol == result})
+                winningPlayer.score++
+            }
+            
+            state.view = VIEW.result
+            render()
+        }
+        state.game.turn = (state.game.turn+1)%2
        if (result==RESULT.incomplete && state.players[state.game.turn].isComputer){
            doComputerMove()
        }
