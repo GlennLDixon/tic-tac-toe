@@ -260,7 +260,7 @@ function getBestMove (board, symbol) {
             `<div class="cell col${colIndex} ${winningLine.some(arr=>(arraysAreEqual(arr,[rowIndex,colIndex]))) ? "winningLine" : ""}"
               data-row=${rowIndex} data-column=${colIndex}>${str}</div>`).join('')}</div>`
         }, ``)
-           let htmlAfter = `<h4>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
+           let htmlAfter = `<h4>Score: ${htmlSpaces(1)} Player 1 - ${state.players[0].score} ${htmlSpaces(2)} ${state.players[1].isComputer? "Computer" : "Player 2" } - ${state.players[1].score}</h4>`
             return `<div id='resultView'> ${htmlBefore} <div id="board">${board}</div> ${htmlAfter} </div>`
         }
 
