@@ -252,7 +252,7 @@ function getBestMove (board, symbol) {
         if(result !== RESULT.tie)
             resultText = getPlayerName(result) + " won"
 
-        let htmlBefore = `<h3>${resultText} ${htmlSpaces(2)} Click to restart</h3>`
+        let htmlBefore = `<h3>${resultText} ${htmlSpaces(6)} Click to restart</h3>`
         let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
             return acc + `<div id="row${rowIndex}" class="row">${curr.map(
             (str,colIndex)=>
