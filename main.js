@@ -195,6 +195,7 @@ function getBestMove (board, symbol) {
      function getPlayerName(playerSymbol){
          if(playerSymbol === state.players[0].symbol)
             return state.players[0].isComputer ? 'Computer' : "Player1"
+        else
             return state.players[1].isComputer ? 'Computer' : "Player2"
      }
 
