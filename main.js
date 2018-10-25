@@ -224,10 +224,9 @@ function getBestMove (board, symbol) {
 
      function htmlGame() {
          const moveNumber = moveCount(state.game._gameBoard) + 1
-         const playerName = state.game.turn === 0 ? 'Player1' : state.players[1].isComputer ? 'Computer' : 'Player2'
-         // Let playerName = 'Computer'
-         // if(!state.players[state.game.turn].isComputer)
-         // playerName = state.game.turn === 0 ? 'Player!' : 'Player2'
+         let playerName = 'Computer'
+         if(!state.players[state.game.turn].isComputer)
+          playerName = state.game.turn === 0 ? 'Player1' : 'Player2'
 
          let htmlBefore = `<h3>move: ${moveNumber} ${htmlSpaces(5)} turn: ${playerName}</h3>`
          let board = state.game._gameBoard.reduce(function(acc,curr,rowIndex){
